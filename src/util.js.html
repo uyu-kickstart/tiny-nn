@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>util.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "src/util.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+  <script src="../mathjax.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#%E4%BE%BF%E5%88%A9%E9%96%A2%E6%95%B0%E9%81%94">便利関数達</a>
+      </div>
+      <div class="heading h2">
+        <a href="#%E9%85%8D%E5%88%97%E3%81%AE%E4%B8%AD%E3%81%A7%E3%82%82%E3%81%A3%E3%81%A8%E3%82%82%E5%A4%A7%E3%81%8D%E3%81%84%E5%80%A4%E3%81%AE%E6%B7%BB%E5%AD%97%E3%82%92%E8%BF%94%E3%81%99%E3%80%82">配列の中でもっとも大きい値の添字を返す。</a>
+      </div>
+      <div class="heading h2">
+        <a href="#n%C3%97m%E3%81%AE%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E3%81%AA%E8%A1%8C%E5%88%97%E3%82%92%E4%BD%9C%E3%82%8B%E3%80%82">n×mのランダムな行列を作る。</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>util.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-1" id="line-1">1</a>  <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+<a class="line-num" href="#line-2" id="line-2">2</a>  
+<a class="line-num" href="#line-3" id="line-3">3</a>  
+<a class="line-num" href="#line-4" id="line-4">4</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="%E4%BE%BF%E5%88%A9%E9%96%A2%E6%95%B0%E9%81%94">
+  <h1>
+    <a href="#%E4%BE%BF%E5%88%A9%E9%96%A2%E6%95%B0%E9%81%94" name="%E4%BE%BF%E5%88%A9%E9%96%A2%E6%95%B0%E9%81%94" class="pilcrow">&#182;</a>
+    便利関数達
+  </h1>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-6" id="line-6">6</a>  
+<a class="line-num" href="#line-7" id="line-7">7</a>  
+<a class="line-num" href="#line-8" id="line-8">8</a>  
+<a class="line-num" href="#line-9" id="line-9">9</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="%E9%85%8D%E5%88%97%E3%81%AE%E4%B8%AD%E3%81%A7%E3%82%82%E3%81%A3%E3%81%A8%E3%82%82%E5%A4%A7%E3%81%8D%E3%81%84%E5%80%A4%E3%81%AE%E6%B7%BB%E5%AD%97%E3%82%92%E8%BF%94%E3%81%99%E3%80%82">
+  <h2>
+    <a href="#%E9%85%8D%E5%88%97%E3%81%AE%E4%B8%AD%E3%81%A7%E3%82%82%E3%81%A3%E3%81%A8%E3%82%82%E5%A4%A7%E3%81%8D%E3%81%84%E5%80%A4%E3%81%AE%E6%B7%BB%E5%AD%97%E3%82%92%E8%BF%94%E3%81%99%E3%80%82" name="%E9%85%8D%E5%88%97%E3%81%AE%E4%B8%AD%E3%81%A7%E3%82%82%E3%81%A3%E3%81%A8%E3%82%82%E5%A4%A7%E3%81%8D%E3%81%84%E5%80%A4%E3%81%AE%E6%B7%BB%E5%AD%97%E3%82%92%E8%BF%94%E3%81%99%E3%80%82" class="pilcrow">&#182;</a>
+    配列の中でもっとも大きい値の添字を返す。
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-10" id="line-10">10</a>  
+<a class="line-num" href="#line-11" id="line-11">11</a>  <span class="nx">exports</span><span class="p">.</span><span class="nx">maxIndex</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">maxIndex</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-12" id="line-12">12</a>    <span class="kd">var</span>
+<a class="line-num" href="#line-13" id="line-13">13</a>    <span class="nx">max</span> <span class="o">=</span> <span class="o">-</span><span class="kc">Infinity</span><span class="p">,</span> <span class="nx">maxIndex</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<a class="line-num" href="#line-14" id="line-14">14</a>    <span class="nx">i</span><span class="p">,</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<a class="line-num" href="#line-15" id="line-15">15</a>  
+<a class="line-num" href="#line-16" id="line-16">16</a>    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-17" id="line-17">17</a>      <span class="k">if</span> <span class="p">(</span><span class="nx">max</span> <span class="o">&lt;</span> <span class="nx">array</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="p">{</span>
+<a class="line-num" href="#line-18" id="line-18">18</a>        <span class="nx">max</span> <span class="o">=</span> <span class="nx">array</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<a class="line-num" href="#line-19" id="line-19">19</a>        <span class="nx">maxIndex</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
+<a class="line-num" href="#line-20" id="line-20">20</a>      <span class="p">}</span>
+<a class="line-num" href="#line-21" id="line-21">21</a>    <span class="p">}</span>
+<a class="line-num" href="#line-22" id="line-22">22</a>  
+<a class="line-num" href="#line-23" id="line-23">23</a>    <span class="k">return</span> <span class="nx">maxIndex</span><span class="p">;</span>
+<a class="line-num" href="#line-24" id="line-24">24</a>  <span class="p">};</span>
+<a class="line-num" href="#line-25" id="line-25">25</a>  
+<a class="line-num" href="#line-26" id="line-26">26</a>  
+<a class="line-num" href="#line-27" id="line-27">27</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="n%C3%97m%E3%81%AE%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E3%81%AA%E8%A1%8C%E5%88%97%E3%82%92%E4%BD%9C%E3%82%8B%E3%80%82">
+  <h2>
+    <a href="#n%C3%97m%E3%81%AE%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E3%81%AA%E8%A1%8C%E5%88%97%E3%82%92%E4%BD%9C%E3%82%8B%E3%80%82" name="n%C3%97m%E3%81%AE%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E3%81%AA%E8%A1%8C%E5%88%97%E3%82%92%E4%BD%9C%E3%82%8B%E3%80%82" class="pilcrow">&#182;</a>
+    <code>n</code>×<code>m</code>のランダムな行列を作る。
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-28" id="line-28">28</a>  
+<a class="line-num" href="#line-29" id="line-29">29</a>  <span class="nx">exports</span><span class="p">.</span><span class="nx">randomMatrix</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">randomMatrix</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-30" id="line-30">30</a>    <span class="kd">var</span>
+<a class="line-num" href="#line-31" id="line-31">31</a>    <span class="nx">mat</span> <span class="o">=</span> <span class="p">[],</span>
+<a class="line-num" href="#line-32" id="line-32">32</a>    <span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">;</span>
+<a class="line-num" href="#line-33" id="line-33">33</a>  
+<a class="line-num" href="#line-34" id="line-34">34</a>    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">n</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-35" id="line-35">35</a>      <span class="nx">mat</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+<a class="line-num" href="#line-36" id="line-36">36</a>      <span class="k">for</span> <span class="p">(</span><span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">m</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-37" id="line-37">37</a>        <span class="nx">mat</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="nx">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">;</span>
+<a class="line-num" href="#line-38" id="line-38">38</a>      <span class="p">}</span>
+<a class="line-num" href="#line-39" id="line-39">39</a>    <span class="p">}</span>
+<a class="line-num" href="#line-40" id="line-40">40</a>  
+<a class="line-num" href="#line-41" id="line-41">41</a>    <span class="k">return</span> <span class="nx">mat</span><span class="p">;</span>
+<a class="line-num" href="#line-42" id="line-42">42</a>  <span class="p">};</span>
+<a class="line-num" href="#line-43" id="line-43">43</a>  </pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

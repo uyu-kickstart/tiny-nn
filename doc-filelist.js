@@ -1,0 +1,1 @@
+var tree={"files":["README.md","index.js"],"dirs":{"sample":{"dirs":{"xor":{"files":["xor.js"]}}},"src":{"files":["activation_func.js","neuralnetwork.js","util.js"]}}};

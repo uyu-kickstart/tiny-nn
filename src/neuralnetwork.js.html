@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>neuralnetwork.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "src/neuralnetwork.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+  <script src="../mathjax.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF">モジュールの読み込み</a>
+      </div>
+      <div class="heading h1">
+        <a href="#neuralnetwork%E3%82%AF%E3%83%A9%E3%82%B9">NeuralNetworkクラス</a>
+      </div>
+      <div class="heading h2">
+        <a href="#%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC">コンストラクター</a>
+      </div>
+      <div class="heading h2">
+        <a href="#%E5%90%84%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E5%87%BA%E5%8A%9B%E3%82%92%E8%A8%88%E7%AE%97">各ユニットの出力を計算</a>
+      </div>
+      <div class="heading h2">
+        <a href="#%E6%95%99%E5%B8%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E7%94%A8%E3%81%84%E3%81%A6%E5%AD%A6%E7%BF%92">教師データを用いて学習</a>
+      </div>
+      <div class="heading h2">
+        <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0%E3%81%AB%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E3%80%82">学習の結果をストリームに書き出す。</a>
+      </div>
+      <div class="heading h2">
+        <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%83%90%E3%83%83%E3%83%95%E3%82%A1%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82">学習の結果をバッファから読み込む。</a>
+      </div>
+      <div class="heading h1">
+        <a href="#%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%88%E3%80%82">クラスのエクスポート。</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>neuralnetwork.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-1" id="line-1">1</a>  <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+<a class="line-num" href="#line-2" id="line-2">2</a>  
+<a class="line-num" href="#line-3" id="line-3">3</a>  
+<a class="line-num" href="#line-4" id="line-4">4</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF">
+  <h1>
+    <a href="#%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF" name="%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF" class="pilcrow">&#182;</a>
+    モジュールの読み込み
+  </h1>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-6" id="line-6">6</a>  
+<a class="line-num" href="#line-7" id="line-7">7</a>  <span class="kd">var</span>
+<a class="line-num" href="#line-8" id="line-8">8</a>  
+<a class="line-num" href="#line-9" id="line-9">9</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>Node.jsのモジュール</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-8" id="line-8">8</a>  
+<a class="line-num" href="#line-9" id="line-9">9</a>  <span class="nx">assert</span>          <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;assert&#39;</span><span class="p">),</span>
+<a class="line-num" href="#line-10" id="line-10">10</a>  
+<a class="line-num" href="#line-11" id="line-11">11</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>3rdパーティーのモジュール</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-10" id="line-10">10</a>  
+<a class="line-num" href="#line-11" id="line-11">11</a>  <span class="nx">msgpack</span>         <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;msgpack5&#39;</span><span class="p">)(),</span>
+<a class="line-num" href="#line-12" id="line-12">12</a>  <span class="nx">stream_buffers</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;stream-buffers&#39;</span><span class="p">),</span>
+<a class="line-num" href="#line-13" id="line-13">13</a>  
+<a class="line-num" href="#line-14" id="line-14">14</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>自作のモジュール</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-13" id="line-13">13</a>  
+<a class="line-num" href="#line-14" id="line-14">14</a>  <span class="nx">activation_func</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./activation_func&#39;</span><span class="p">);</span>
+<a class="line-num" href="#line-15" id="line-15">15</a>  
+<a class="line-num" href="#line-16" id="line-16">16</a>  
+<a class="line-num" href="#line-17" id="line-17">17</a>  
+<a class="line-num" href="#line-18" id="line-18">18</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="neuralnetwork%E3%82%AF%E3%83%A9%E3%82%B9">
+  <h1>
+    <a href="#neuralnetwork%E3%82%AF%E3%83%A9%E3%82%B9" name="neuralnetwork%E3%82%AF%E3%83%A9%E3%82%B9" class="pilcrow">&#182;</a>
+    NeuralNetworkクラス
+  </h1>
+</div>
+
+  </div>
+  <div class="body"><p>基本的なアルゴリズムは<a href="http://www-ailab.elcom.nitech.ac.jp/lecture/neuro/menu.html">http://www-ailab.elcom.nitech.ac.jp/lecture/neuro/menu.html</a>のバックプロパゲーションを参照。</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-21" id="line-21">21</a>  
+<a class="line-num" href="#line-22" id="line-22">22</a>  
+<a class="line-num" href="#line-23" id="line-23">23</a>  
+<a class="line-num" href="#line-24" id="line-24">24</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC">
+  <h2>
+    <a href="#%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC" name="%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC" class="pilcrow">&#182;</a>
+    コンストラクター
+  </h2>
+</div>
+
+  </div>
+  <div class="body"><p>引数は、</p>
+
+<ul>
+<li><code>fhName</code>は入力→隠れ層の活性化関数の名前。<code>'sigmoid'</code>か<code>'tanh'</code>か<code>'inverse_abs'</code>、<code>'linear'</code>。</li>
+<li><code>foName</code>は入力→隠れ層の活性化関数の名前。<code>'sigmoid'</code>か<code>'tanh'</code>か<code>'inverse_abs'</code>、<code>'linear'</code>。</li>
+<li><code>Wh</code>は入力→隠れ層の結合荷重（二重配列）</li>
+<li><code>Wo</code>は隠れ層→出力の結合荷重（二重配列）</li>
+</ul>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-32" id="line-32">32</a>  
+<a class="line-num" href="#line-33" id="line-33">33</a>  <span class="kd">function</span> <span class="nx">NeuralNetwork</span><span class="p">(</span><span class="nx">fhName</span><span class="p">,</span> <span class="nx">foName</span><span class="p">,</span> <span class="nx">Wh</span><span class="p">,</span> <span class="nx">Wo</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-34" id="line-34">34</a>  
+<a class="line-num" href="#line-35" id="line-35">35</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p><code>new</code>無しでもインスタンスを作成できるようにする。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-34" id="line-34">34</a>  
+<a class="line-num" href="#line-35" id="line-35">35</a>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">this</span> <span class="k">instanceof</span> <span class="nx">NeuralNetwork</span><span class="p">))</span> <span class="k">return</span> <span class="k">new</span> <span class="nx">NeuralNetwork</span><span class="p">(</span><span class="nx">Wh</span><span class="p">,</span> <span class="nx">Wo</span><span class="p">);</span>
+<a class="line-num" href="#line-36" id="line-36">36</a>  
+<a class="line-num" href="#line-37" id="line-37">37</a>  
+<a class="line-num" href="#line-38" id="line-38">38</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+</div>
+<p><code>Wh.length</code>は隠れ層のユニットの数に等しく、
+<code>Wo[0].length</code>は隠れ層のユニットの数より一つ多い。
+（隠れ層のユニットの値の最後に<code>1</code>を追加して閾値を表現するため）</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-39" id="line-39">39</a>  
+<a class="line-num" href="#line-40" id="line-40">40</a>    <span class="nx">assert</span><span class="p">(</span><span class="nx">Wh</span><span class="p">.</span><span class="nx">length</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">===</span> <span class="nx">Wo</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">length</span><span class="p">,</span> <span class="s1">&#39;array sizes don\&#39;t match.&#39;</span><span class="p">);</span>
+<a class="line-num" href="#line-41" id="line-41">41</a>  
+<a class="line-num" href="#line-42" id="line-42">42</a>  
+<a class="line-num" href="#line-43" id="line-43">43</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
+</div>
+<p>引数を保存。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-42" id="line-42">42</a>  
+<a class="line-num" href="#line-43" id="line-43">43</a>    <span class="k">this</span><span class="p">.</span><span class="nx">fhName</span> <span class="o">=</span> <span class="nx">fhName</span><span class="p">;</span>
+<a class="line-num" href="#line-44" id="line-44">44</a>    <span class="k">this</span><span class="p">.</span><span class="nx">foName</span> <span class="o">=</span> <span class="nx">foName</span><span class="p">;</span>
+<a class="line-num" href="#line-45" id="line-45">45</a>    <span class="k">this</span><span class="p">.</span><span class="nx">Wh</span> <span class="o">=</span> <span class="nx">Wh</span><span class="p">;</span>
+<a class="line-num" href="#line-46" id="line-46">46</a>    <span class="k">this</span><span class="p">.</span><span class="nx">Wo</span> <span class="o">=</span> <span class="nx">Wo</span><span class="p">;</span>
+<a class="line-num" href="#line-47" id="line-47">47</a>  
+<a class="line-num" href="#line-48" id="line-48">48</a>  
+<a class="line-num" href="#line-49" id="line-49">49</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11">&#182;</a>
+</div>
+<p>活性化関数<code>f(x)</code>と活性化関数を微分したもの<code>df(y)</code>（<code>y</code>も同時に渡しているのは速度面の都合）</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-48" id="line-48">48</a>  
+<a class="line-num" href="#line-49" id="line-49">49</a>    <span class="k">this</span><span class="p">.</span><span class="nx">fh</span> <span class="o">=</span> <span class="nx">activation_func</span><span class="p">[</span><span class="nx">fhName</span><span class="p">].</span><span class="nx">func</span><span class="p">;</span>
+<a class="line-num" href="#line-50" id="line-50">50</a>    <span class="k">this</span><span class="p">.</span><span class="nx">dfh</span> <span class="o">=</span> <span class="nx">activation_func</span><span class="p">[</span><span class="nx">fhName</span><span class="p">].</span><span class="nx">defunc</span><span class="p">;</span>
+<a class="line-num" href="#line-51" id="line-51">51</a>    <span class="k">this</span><span class="p">.</span><span class="nx">fo</span> <span class="o">=</span> <span class="nx">activation_func</span><span class="p">[</span><span class="nx">foName</span><span class="p">].</span><span class="nx">func</span><span class="p">;</span>
+<a class="line-num" href="#line-52" id="line-52">52</a>    <span class="k">this</span><span class="p">.</span><span class="nx">dfo</span> <span class="o">=</span> <span class="nx">activation_func</span><span class="p">[</span><span class="nx">foName</span><span class="p">].</span><span class="nx">defunc</span><span class="p">;</span>
+<a class="line-num" href="#line-53" id="line-53">53</a>  <span class="p">}</span>
+<a class="line-num" href="#line-54" id="line-54">54</a>  
+<a class="line-num" href="#line-55" id="line-55">55</a>  
+<a class="line-num" href="#line-56" id="line-56">56</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="%E5%90%84%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E5%87%BA%E5%8A%9B%E3%82%92%E8%A8%88%E7%AE%97">
+  <h2>
+    <a href="#%E5%90%84%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E5%87%BA%E5%8A%9B%E3%82%92%E8%A8%88%E7%AE%97" name="%E5%90%84%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E5%87%BA%E5%8A%9B%E3%82%92%E8%A8%88%E7%AE%97" class="pilcrow">&#182;</a>
+    各ユニットの出力を計算
+  </h2>
+</div>
+
+  </div>
+  <div class="body"><p>引数は、</p>
+
+<ul>
+<li><code>X</code>は入力値（配列）</li>
+</ul>
+
+<p>返り値は、</p>
+
+<ul>
+<li><code>result.H</code>は隠れ層の各ユニットの値（配列）</li>
+<li><code>result.O</code>は出力の各ユニットの値（配列）</li>
+</ul>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-66" id="line-66">66</a>  
+<a class="line-num" href="#line-67" id="line-67">67</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">fire</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">fire</span><span class="p">(</span><span class="nx">X</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-68" id="line-68">68</a>  
+<a class="line-num" href="#line-69" id="line-69">69</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13">&#182;</a>
+</div>
+<p><code>Wh[0].length</code>は入力値の数より一つ多い。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-68" id="line-68">68</a>  
+<a class="line-num" href="#line-69" id="line-69">69</a>    <span class="nx">assert</span><span class="p">(</span><span class="nx">X</span><span class="p">.</span><span class="nx">length</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">===</span> <span class="k">this</span><span class="p">.</span><span class="nx">Wh</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">length</span><span class="p">,</span> <span class="s1">&#39;array sizes don\&#39;t match.&#39;</span><span class="p">);</span>
+<a class="line-num" href="#line-70" id="line-70">70</a>  
+<a class="line-num" href="#line-71" id="line-71">71</a>  
+<a class="line-num" href="#line-72" id="line-72">72</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14">&#182;</a>
+</div>
+<p>変数宣言。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-71" id="line-71">71</a>  
+<a class="line-num" href="#line-72" id="line-72">72</a>    <span class="kd">var</span>
+<a class="line-num" href="#line-73" id="line-73">73</a>  
+<a class="line-num" href="#line-74" id="line-74">74</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-15" id="section-15">&#182;</a>
+</div>
+<p><code>this</code>無しで参照できるようにする。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-73" id="line-73">73</a>  
+<a class="line-num" href="#line-74" id="line-74">74</a>    <span class="nx">fh</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">fh</span><span class="p">,</span> <span class="nx">fo</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">fo</span><span class="p">,</span>
+<a class="line-num" href="#line-75" id="line-75">75</a>    <span class="nx">Wh</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">Wh</span><span class="p">,</span> <span class="nx">Wo</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">Wo</span><span class="p">,</span>
+<a class="line-num" href="#line-76" id="line-76">76</a>  
+<a class="line-num" href="#line-77" id="line-77">77</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
+</div>
+<ul>
+<li><code>H</code>は隠れ層の各ユニットの値の配列</li>
+<li><code>O</code>は出力の各ユニットの値の配列</li>
+</ul>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-77" id="line-77">77</a>  
+<a class="line-num" href="#line-78" id="line-78">78</a>    <span class="nx">H</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">O</span> <span class="o">=</span> <span class="p">[],</span>
+<a class="line-num" href="#line-79" id="line-79">79</a>  
+<a class="line-num" href="#line-80" id="line-80">80</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
+</div>
+<ul>
+<li><code>i</code>は<code>X</code>に対する添字</li>
+<li><code>j</code>は<code>H</code>に対する添字</li>
+<li><code>k</code>は<code>O</code>に対する添字</li>
+</ul>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-81" id="line-81">81</a>  
+<a class="line-num" href="#line-82" id="line-82">82</a>    <span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">,</span> <span class="nx">k</span><span class="p">,</span>
+<a class="line-num" href="#line-83" id="line-83">83</a>  
+<a class="line-num" href="#line-84" id="line-84">84</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
+</div>
+<p>合計値を一時的に格納する変数。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-83" id="line-83">83</a>  
+<a class="line-num" href="#line-84" id="line-84">84</a>    <span class="nx">sum</span><span class="p">;</span>
+<a class="line-num" href="#line-85" id="line-85">85</a>  
+<a class="line-num" href="#line-86" id="line-86">86</a>  
+<a class="line-num" href="#line-87" id="line-87">87</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
+</div>
+<p>隠れ層の各ユニットの値の計算する。</p>
+
+<div class='highlight'><pre><code language=''>${\bf H}_j = f_h( \sum_{i = 0}^{{\rm len}({\bf X}) + 1}{{\bf X}_i {\bf Wh}_{ji}} )$
+</code></pre></div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-90" id="line-90">90</a>  
+<a class="line-num" href="#line-91" id="line-91">91</a>    <span class="k">for</span> <span class="p">(</span><span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">Wh</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-92" id="line-92">92</a>      <span class="nx">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a class="line-num" href="#line-93" id="line-93">93</a>      <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">X</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-94" id="line-94">94</a>        <span class="nx">sum</span> <span class="o">+=</span> <span class="nx">X</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">*</span> <span class="nx">Wh</span><span class="p">[</span><span class="nx">j</span><span class="p">][</span><span class="nx">i</span><span class="p">];</span>
+<a class="line-num" href="#line-95" id="line-95">95</a>      <span class="p">}</span>
+<a class="line-num" href="#line-96" id="line-96">96</a>      <span class="nx">sum</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">*</span> <span class="nx">Wh</span><span class="p">[</span><span class="nx">j</span><span class="p">][</span><span class="nx">X</span><span class="p">.</span><span class="nx">length</span><span class="p">];</span>
+<a class="line-num" href="#line-97" id="line-97">97</a>  
+<a class="line-num" href="#line-98" id="line-98">98</a>      <span class="nx">H</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">=</span> <span class="nx">fh</span><span class="p">(</span><span class="nx">sum</span><span class="p">);</span>
+<a class="line-num" href="#line-99" id="line-99">99</a>    <span class="p">}</span>
+<a class="line-num" href="#line-100" id="line-100">100</a>  
+<a class="line-num" href="#line-101" id="line-101">101</a>  
+<a class="line-num" href="#line-102" id="line-102">102</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+</div>
+<p>出力の各ユニットの値の計算する。</p>
+
+<div class='highlight'><pre><code language=''>${\bf O}_k = f_o( \sum_{j = 0}^{{\rm len}({\bf H}) + 1}{{\bf H}_j {\bf Wo}_{kj}} )$
+</code></pre></div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-105" id="line-105">105</a>  
+<a class="line-num" href="#line-106" id="line-106">106</a>    <span class="k">for</span> <span class="p">(</span><span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&lt;</span> <span class="nx">Wo</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-107" id="line-107">107</a>      <span class="nx">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a class="line-num" href="#line-108" id="line-108">108</a>      <span class="k">for</span> <span class="p">(</span><span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">H</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-109" id="line-109">109</a>        <span class="nx">sum</span> <span class="o">+=</span> <span class="nx">H</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">*</span> <span class="nx">Wo</span><span class="p">[</span><span class="nx">k</span><span class="p">][</span><span class="nx">j</span><span class="p">];</span>
+<a class="line-num" href="#line-110" id="line-110">110</a>      <span class="p">}</span>
+<a class="line-num" href="#line-111" id="line-111">111</a>      <span class="nx">sum</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">*</span> <span class="nx">Wo</span><span class="p">[</span><span class="nx">k</span><span class="p">][</span><span class="nx">H</span><span class="p">.</span><span class="nx">length</span><span class="p">];</span>
+<a class="line-num" href="#line-112" id="line-112">112</a>  
+<a class="line-num" href="#line-113" id="line-113">113</a>      <span class="nx">O</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="nx">fo</span><span class="p">(</span><span class="nx">sum</span><span class="p">);</span>
+<a class="line-num" href="#line-114" id="line-114">114</a>    <span class="p">}</span>
+<a class="line-num" href="#line-115" id="line-115">115</a>  
+<a class="line-num" href="#line-116" id="line-116">116</a>  
+<a class="line-num" href="#line-117" id="line-117">117</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
+</div>
+<p>返り値は<code>H</code>と<code>O</code>というプロパティを持ったオブジェクト。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-116" id="line-116">116</a>  
+<a class="line-num" href="#line-117" id="line-117">117</a>    <span class="k">return</span> <span class="p">{</span>
+<a class="line-num" href="#line-118" id="line-118">118</a>      <span class="nx">H</span><span class="o">:</span> <span class="nx">H</span><span class="p">,</span>
+<a class="line-num" href="#line-119" id="line-119">119</a>      <span class="nx">O</span><span class="o">:</span> <span class="nx">O</span><span class="p">,</span>
+<a class="line-num" href="#line-120" id="line-120">120</a>    <span class="p">};</span>
+<a class="line-num" href="#line-121" id="line-121">121</a>  <span class="p">};</span>
+<a class="line-num" href="#line-122" id="line-122">122</a>  
+<a class="line-num" href="#line-123" id="line-123">123</a>  
+<a class="line-num" href="#line-124" id="line-124">124</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="%E6%95%99%E5%B8%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E7%94%A8%E3%81%84%E3%81%A6%E5%AD%A6%E7%BF%92">
+  <h2>
+    <a href="#%E6%95%99%E5%B8%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E7%94%A8%E3%81%84%E3%81%A6%E5%AD%A6%E7%BF%92" name="%E6%95%99%E5%B8%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E7%94%A8%E3%81%84%E3%81%A6%E5%AD%A6%E7%BF%92" class="pilcrow">&#182;</a>
+    教師データを用いて学習
+  </h2>
+</div>
+
+  </div>
+  <div class="body"><p>引数は、</p>
+
+<ul>
+<li><code>X</code>は入力値（配列）</li>
+<li><code>T</code>は教師データとして期待される出力（配列）</li>
+<li><code>eta</code>は学習係数（小数値、デフォルト値は<code>0.1</code>）</li>
+</ul>
+
+<p>返り値は、<code>this.fire(X)</code>の結果。
+（精度を確認する際に再計算を防ぐためで、あまり深い意味はない）</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-134" id="line-134">134</a>  
+<a class="line-num" href="#line-135" id="line-135">135</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">fit</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">fit</span><span class="p">(</span><span class="nx">X</span><span class="p">,</span> <span class="nx">T</span><span class="p">,</span> <span class="nx">eta</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-136" id="line-136">136</a>  
+<a class="line-num" href="#line-137" id="line-137">137</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-23" id="section-23">&#182;</a>
+</div>
+<p>デフォルト値の処理</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-136" id="line-136">136</a>  
+<a class="line-num" href="#line-137" id="line-137">137</a>    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">eta</span> <span class="o">===</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span> <span class="nx">eta</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span>
+<a class="line-num" href="#line-138" id="line-138">138</a>  
+<a class="line-num" href="#line-139" id="line-139">139</a>  
+<a class="line-num" href="#line-140" id="line-140">140</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-24" id="section-24">&#182;</a>
+</div>
+<p><code>Wo.length</code>は出力のユニットの数と等しい。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-139" id="line-139">139</a>  
+<a class="line-num" href="#line-140" id="line-140">140</a>    <span class="nx">assert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">Wo</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="nx">T</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="s1">&#39;array sizes don\&#39;t match.&#39;</span><span class="p">);</span>
+<a class="line-num" href="#line-141" id="line-141">141</a>  
+<a class="line-num" href="#line-142" id="line-142">142</a>  
+<a class="line-num" href="#line-143" id="line-143">143</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-25" id="section-25">&#182;</a>
+</div>
+<p>変数宣言。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-142" id="line-142">142</a>  
+<a class="line-num" href="#line-143" id="line-143">143</a>    <span class="kd">var</span>
+<a class="line-num" href="#line-144" id="line-144">144</a>  
+<a class="line-num" href="#line-145" id="line-145">145</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-26" id="section-26">&#182;</a>
+</div>
+<p><code>this</code>無しで参照できるようにする。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-144" id="line-144">144</a>  
+<a class="line-num" href="#line-145" id="line-145">145</a>    <span class="nx">dfh</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">dfh</span><span class="p">,</span> <span class="nx">dfo</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">dfo</span><span class="p">,</span>
+<a class="line-num" href="#line-146" id="line-146">146</a>    <span class="nx">Wh</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">Wh</span><span class="p">,</span> <span class="nx">Wo</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">Wo</span><span class="p">,</span>
+<a class="line-num" href="#line-147" id="line-147">147</a>  
+<a class="line-num" href="#line-148" id="line-148">148</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-27" id="section-27">&#182;</a>
+</div>
+<p>隠れ層と出力の各ユニットの値を計算した結果。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-147" id="line-147">147</a>  
+<a class="line-num" href="#line-148" id="line-148">148</a>    <span class="nx">result</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="nx">X</span><span class="p">),</span>
+<a class="line-num" href="#line-149" id="line-149">149</a>  
+<a class="line-num" href="#line-150" id="line-150">150</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-28" id="section-28">&#182;</a>
+</div>
+<ul>
+<li><code>H</code>は隠れ層の各ユニットの値</li>
+<li><code>O</code>は出力の各ユニットの値</li>
+</ul>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-150" id="line-150">150</a>  
+<a class="line-num" href="#line-151" id="line-151">151</a>    <span class="nx">H</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">H</span><span class="p">,</span>
+<a class="line-num" href="#line-152" id="line-152">152</a>    <span class="nx">O</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">O</span><span class="p">,</span>
+<a class="line-num" href="#line-153" id="line-153">153</a>  
+<a class="line-num" href="#line-154" id="line-154">154</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-29" id="section-29">&#182;</a>
+</div>
+<ul>
+<li><code>dO</code>はδO。</li>
+<li><code>dHj</code>はδHj。</li>
+</ul>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-154" id="line-154">154</a>  
+<a class="line-num" href="#line-155" id="line-155">155</a>    <span class="nx">dO</span> <span class="o">=</span> <span class="p">[],</span>
+<a class="line-num" href="#line-156" id="line-156">156</a>    <span class="nx">dHj</span><span class="p">,</span>
+<a class="line-num" href="#line-157" id="line-157">157</a>  
+<a class="line-num" href="#line-158" id="line-158">158</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-30" id="section-30">&#182;</a>
+</div>
+<ul>
+<li><code>i</code>は<code>X</code>に対する添字</li>
+<li><code>j</code>は<code>H</code>に対する添字</li>
+<li><code>k</code>は<code>O</code>に対する添字</li>
+</ul>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-159" id="line-159">159</a>  
+<a class="line-num" href="#line-160" id="line-160">160</a>    <span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">,</span> <span class="nx">k</span><span class="p">,</span>
+<a class="line-num" href="#line-161" id="line-161">161</a>  
+<a class="line-num" href="#line-162" id="line-162">162</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-31" id="section-31">&#182;</a>
+</div>
+<p>合計値を一時的に格納する変数。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-161" id="line-161">161</a>  
+<a class="line-num" href="#line-162" id="line-162">162</a>    <span class="nx">sum</span><span class="p">;</span>
+<a class="line-num" href="#line-163" id="line-163">163</a>  
+<a class="line-num" href="#line-164" id="line-164">164</a>  
+<a class="line-num" href="#line-165" id="line-165">165</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-32" id="section-32">&#182;</a>
+</div>
+<p>δOの計算。</p>
+
+<div class='highlight'><pre><code language=''>${\bf \delta O}_k = ({\bf T}_k - {\bf O}_k) df_o({\bf O}_k)$
+</code></pre></div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-168" id="line-168">168</a>  
+<a class="line-num" href="#line-169" id="line-169">169</a>    <span class="k">for</span> <span class="p">(</span><span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&lt;</span> <span class="nx">O</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-170" id="line-170">170</a>      <span class="nx">dO</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">T</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">-</span> <span class="nx">O</span><span class="p">[</span><span class="nx">k</span><span class="p">])</span> <span class="o">*</span> <span class="nx">dfo</span><span class="p">(</span><span class="nx">O</span><span class="p">[</span><span class="nx">k</span><span class="p">]);</span>
+<a class="line-num" href="#line-171" id="line-171">171</a>    <span class="p">}</span>
+<a class="line-num" href="#line-172" id="line-172">172</a>  
+<a class="line-num" href="#line-173" id="line-173">173</a>  
+<a class="line-num" href="#line-174" id="line-174">174</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-33" id="section-33">&#182;</a>
+</div>
+<p><code>Wh</code>の更新。</p>
+
+<div class='highlight'><pre><code language=''>$\Delta {\bf Wh}_{ji} = \eta {\bf X}_i df_h({\bf H}_j) \sum_{k = 0}^{{\rm len}({\bf O})} {\bf Wo}_{kj} {\bf \delta O}_k$
+</code></pre></div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-177" id="line-177">177</a>  
+<a class="line-num" href="#line-178" id="line-178">178</a>    <span class="k">for</span> <span class="p">(</span><span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">Wh</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-179" id="line-179">179</a>      <span class="nx">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a class="line-num" href="#line-180" id="line-180">180</a>      <span class="k">for</span> <span class="p">(</span><span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&lt;</span> <span class="nx">O</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-181" id="line-181">181</a>        <span class="nx">sum</span> <span class="o">+=</span> <span class="nx">Wo</span><span class="p">[</span><span class="nx">k</span><span class="p">][</span><span class="nx">j</span><span class="p">]</span> <span class="o">*</span> <span class="nx">dO</span><span class="p">[</span><span class="nx">k</span><span class="p">];</span>
+<a class="line-num" href="#line-182" id="line-182">182</a>      <span class="p">}</span>
+<a class="line-num" href="#line-183" id="line-183">183</a>      <span class="nx">dHj</span> <span class="o">=</span> <span class="nx">dfh</span><span class="p">(</span><span class="nx">H</span><span class="p">[</span><span class="nx">j</span><span class="p">])</span> <span class="o">*</span> <span class="nx">sum</span><span class="p">;</span>
+<a class="line-num" href="#line-184" id="line-184">184</a>  
+<a class="line-num" href="#line-185" id="line-185">185</a>      <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">X</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-186" id="line-186">186</a>        <span class="nx">Wh</span><span class="p">[</span><span class="nx">j</span><span class="p">][</span><span class="nx">i</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">eta</span> <span class="o">*</span> <span class="nx">dHj</span> <span class="o">*</span> <span class="nx">X</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<a class="line-num" href="#line-187" id="line-187">187</a>      <span class="p">}</span>
+<a class="line-num" href="#line-188" id="line-188">188</a>      <span class="nx">Wh</span><span class="p">[</span><span class="nx">j</span><span class="p">][</span><span class="nx">X</span><span class="p">.</span><span class="nx">length</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">eta</span> <span class="o">*</span> <span class="nx">dHj</span> <span class="o">*</span> <span class="mi">1</span><span class="p">;</span>
+<a class="line-num" href="#line-189" id="line-189">189</a>    <span class="p">}</span>
+<a class="line-num" href="#line-190" id="line-190">190</a>  
+<a class="line-num" href="#line-191" id="line-191">191</a>  
+<a class="line-num" href="#line-192" id="line-192">192</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-34" id="section-34">&#182;</a>
+</div>
+<p><code>Wo</code>の更新。</p>
+
+<div class='highlight'><pre><code language=''>$\Delta {\bf Wo}_{kj} = \eta {\bf H}_j {\bf \delta O}_k$
+</code></pre></div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-195" id="line-195">195</a>  
+<a class="line-num" href="#line-196" id="line-196">196</a>    <span class="k">for</span> <span class="p">(</span><span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&lt;</span> <span class="nx">Wo</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-197" id="line-197">197</a>      <span class="k">for</span> <span class="p">(</span><span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">H</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-198" id="line-198">198</a>        <span class="nx">Wo</span><span class="p">[</span><span class="nx">k</span><span class="p">][</span><span class="nx">j</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">eta</span> <span class="o">*</span> <span class="nx">dO</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">*</span> <span class="nx">H</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
+<a class="line-num" href="#line-199" id="line-199">199</a>      <span class="p">}</span>
+<a class="line-num" href="#line-200" id="line-200">200</a>      <span class="nx">Wo</span><span class="p">[</span><span class="nx">k</span><span class="p">][</span><span class="nx">H</span><span class="p">.</span><span class="nx">length</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">eta</span> <span class="o">*</span> <span class="nx">dO</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span><span class="p">;</span>
+<a class="line-num" href="#line-201" id="line-201">201</a>    <span class="p">}</span>
+<a class="line-num" href="#line-202" id="line-202">202</a>  
+<a class="line-num" href="#line-203" id="line-203">203</a>  
+<a class="line-num" href="#line-204" id="line-204">204</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-35" id="section-35">&#182;</a>
+</div>
+<p>返り値は<code>result</code>。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-203" id="line-203">203</a>  
+<a class="line-num" href="#line-204" id="line-204">204</a>    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<a class="line-num" href="#line-205" id="line-205">205</a>  <span class="p">};</span>
+<a class="line-num" href="#line-206" id="line-206">206</a>  
+<a class="line-num" href="#line-207" id="line-207">207</a>  
+<a class="line-num" href="#line-208" id="line-208">208</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0%E3%81%AB%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E3%80%82">
+  <h2>
+    <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0%E3%81%AB%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E3%80%82" name="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0%E3%81%AB%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E3%80%82" class="pilcrow">&#182;</a>
+    学習の結果をストリームに書き出す。
+  </h2>
+</div>
+
+  </div>
+  <div class="body"><p>返り値は学習の結果の書き込まれたストリーム。</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-211" id="line-211">211</a>  
+<a class="line-num" href="#line-212" id="line-212">212</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">stream</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">stream</span><span class="p">()</span> <span class="p">{</span>
+<a class="line-num" href="#line-213" id="line-213">213</a>    <span class="kd">var</span>
+<a class="line-num" href="#line-214" id="line-214">214</a>  
+<a class="line-num" href="#line-215" id="line-215">215</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-37" id="section-37">&#182;</a>
+</div>
+<p><code>[fhName, foName, Wh, Wo]</code>という形式で、MessagePackでエンコードする。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-214" id="line-214">214</a>  
+<a class="line-num" href="#line-215" id="line-215">215</a>    <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">fhName</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">foName</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">Wh</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">Wo</span><span class="p">],</span>
+<a class="line-num" href="#line-216" id="line-216">216</a>    <span class="nx">buffer</span> <span class="o">=</span> <span class="nx">msgpack</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span>
+<a class="line-num" href="#line-217" id="line-217">217</a>  
+<a class="line-num" href="#line-218" id="line-218">218</a>  
+<a class="line-num" href="#line-219" id="line-219">219</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-38" id="section-38">&#182;</a>
+</div>
+<p>ストリームの作成。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-218" id="line-218">218</a>  
+<a class="line-num" href="#line-219" id="line-219">219</a>    <span class="nx">stream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">stream_buffers</span><span class="p">.</span><span class="nx">ReadableStreamBuffer</span><span class="p">();</span>
+<a class="line-num" href="#line-220" id="line-220">220</a>  
+<a class="line-num" href="#line-221" id="line-221">221</a>  
+<a class="line-num" href="#line-222" id="line-222">222</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-39" id="section-39">&#182;</a>
+</div>
+<p>ストリームに書き込み。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-221" id="line-221">221</a>  
+<a class="line-num" href="#line-222" id="line-222">222</a>    <span class="nx">stream</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">buffer</span><span class="p">);</span>
+<a class="line-num" href="#line-223" id="line-223">223</a>    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="nx">end</span><span class="p">()</span> <span class="p">{</span>
+<a class="line-num" href="#line-224" id="line-224">224</a>      <span class="nx">stream</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">);</span>
+<a class="line-num" href="#line-225" id="line-225">225</a>    <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+<a class="line-num" href="#line-226" id="line-226">226</a>  
+<a class="line-num" href="#line-227" id="line-227">227</a>  
+<a class="line-num" href="#line-228" id="line-228">228</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-40" id="section-40">&#182;</a>
+</div>
+<p>返り値はストリーム。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-227" id="line-227">227</a>  
+<a class="line-num" href="#line-228" id="line-228">228</a>    <span class="k">return</span> <span class="nx">stream</span><span class="p">;</span>
+<a class="line-num" href="#line-229" id="line-229">229</a>  <span class="p">};</span>
+<a class="line-num" href="#line-230" id="line-230">230</a>  
+<a class="line-num" href="#line-231" id="line-231">231</a>  
+<a class="line-num" href="#line-232" id="line-232">232</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%83%90%E3%83%83%E3%83%95%E3%82%A1%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82">
+  <h2>
+    <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%83%90%E3%83%83%E3%83%95%E3%82%A1%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82" name="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%83%90%E3%83%83%E3%83%95%E3%82%A1%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82" class="pilcrow">&#182;</a>
+    学習の結果をバッファから読み込む。
+  </h2>
+</div>
+
+  </div>
+  <div class="body"><p>引数は、</p>
+
+<ul>
+<li><code>buffer</code>は学習の結果がMessagePackでエンコードされたバッファ。</li>
+</ul>
+
+<p>返り値は読み込まれた<code>NeuralNetwork</code>クラスのインスタンス。</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-239" id="line-239">239</a>  
+<a class="line-num" href="#line-240" id="line-240">240</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">load</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">load</span><span class="p">(</span><span class="nx">buffer</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-241" id="line-241">241</a>    <span class="kd">var</span>
+<a class="line-num" href="#line-242" id="line-242">242</a>    <span class="nx">data</span> <span class="o">=</span> <span class="nx">msgpack</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">buffer</span><span class="p">);</span>
+<a class="line-num" href="#line-243" id="line-243">243</a>  
+<a class="line-num" href="#line-244" id="line-244">244</a>    <span class="nx">assert</span><span class="p">(</span><span class="nx">data</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">,</span> <span class="s1">&#39;buffer is invalid format.&#39;</span><span class="p">);</span>
+<a class="line-num" href="#line-245" id="line-245">245</a>    <span class="nx">assert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;buffer is invalid format.&#39;</span><span class="p">);</span>
+<a class="line-num" href="#line-246" id="line-246">246</a>  
+<a class="line-num" href="#line-247" id="line-247">247</a>    <span class="k">return</span> <span class="k">new</span> <span class="nx">NeuralNetwork</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+<a class="line-num" href="#line-248" id="line-248">248</a>  <span class="p">};</span>
+<a class="line-num" href="#line-249" id="line-249">249</a>  
+<a class="line-num" href="#line-250" id="line-250">250</a>  
+<a class="line-num" href="#line-251" id="line-251">251</a>  
+<a class="line-num" href="#line-252" id="line-252">252</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%88%E3%80%82">
+  <h1>
+    <a href="#%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%88%E3%80%82" name="%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%88%E3%80%82" class="pilcrow">&#182;</a>
+    クラスのエクスポート。
+  </h1>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-253" id="line-253">253</a>  
+<a class="line-num" href="#line-254" id="line-254">254</a>  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">NeuralNetwork</span><span class="p">;</span>
+<a class="line-num" href="#line-255" id="line-255">255</a>  </pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
