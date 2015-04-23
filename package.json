@@ -1,0 +1,23 @@
+{
+  "name": "tiny-nn",
+  "author": "uyu-kickstart <uyu.kickstart@gmail.com>",
+  "contributors": [
+    "TSUYUSATO Kitsune <make.just.on@gmail.com>"
+  ],
+  "description": "It's a tiny Neural-Network library.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": "https://github.com/uyu-kickstart/tiny-nn.git",
+  "homepage": "https://github.com/uyu-kickstart/tiny-nn",
+  "main": "index.js",
+  "scripts": {
+    "doc": "docker --line-numbers --js ./res/mathjax.js -o ./doc src sample index.js README.md"
+  },
+  "devDependencies": {
+    "docker": "^0.2.14"
+  },
+  "dependencies": {
+    "msgpack5": "^2.1.0",
+    "stream-buffers": "^2.1.0"
+  }
+}
