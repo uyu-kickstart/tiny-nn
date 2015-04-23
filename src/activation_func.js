@@ -57,14 +57,14 @@ exports.tanh = {
  */
 exports.inverse_abs = {
   // ```
-  // $f(x) = \frac{x}{1 + \|x\|}$
+  // $f(x) = \frac{x}{1 + |x|}$
   // ```
   func: function funcInverseAbs(x) {
     return x / (1 + (x < 0 ? -x : x));
   },
 
   // ```
-  // $df(y) = (1 - \|y\|)^2$
+  // $df(y) = (1 - |y|)^2$
   // ```
   defunc: function defuncInverseAbs(y) {
     if (y < 0) y = -y;
