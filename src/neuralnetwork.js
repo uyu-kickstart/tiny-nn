@@ -271,7 +271,7 @@ NeuralNetwork.loadMsgpack = function loadMsgpack(buffer) {
  *
  * 返り値は読み込まれた`NeuralNetwork`クラスのインスタンス。
  */
-NeuralNetwork.load = function load(object) {
+NeuralNetwork.load = function load(data) {
   assert(data instanceof Array, 'object is invalid format.');
   assert(data.length === 4, 'object is invalid format.');
 
