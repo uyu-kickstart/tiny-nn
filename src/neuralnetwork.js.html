@@ -35,10 +35,19 @@
         <a href="#%E6%95%99%E5%B8%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E7%94%A8%E3%81%84%E3%81%A6%E5%AD%A6%E7%BF%92">教師データを用いて学習</a>
       </div>
       <div class="heading h2">
+        <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92javascript%E3%81%AE%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AB%E3%81%99%E3%82%8B%E3%80%82">学習の結果をJavaScriptのオブジェクトにする。</a>
+      </div>
+      <div class="heading h2">
+        <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92json%E3%81%AB%E3%81%99%E3%82%8B%E3%80%82">学習の結果をJSONにする。</a>
+      </div>
+      <div class="heading h2">
         <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0%E3%81%AB%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E3%80%82">学習の結果をストリームに書き出す。</a>
       </div>
       <div class="heading h2">
-        <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%83%90%E3%83%83%E3%83%95%E3%82%A1%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82">学習の結果をバッファから読み込む。</a>
+        <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92msgpack%E5%BD%A2%E5%BC%8F%E3%81%AE%E3%83%90%E3%83%83%E3%83%95%E3%82%A1%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82">学習の結果をMsgpack形式のバッファから読み込む。</a>
+      </div>
+      <div class="heading h2">
+        <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92javascript%E3%81%AE%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82">学習の結果をJavaScriptのオブジェクトから読み込む。</a>
       </div>
       <div class="heading h1">
         <a href="#%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%88%E3%80%82">クラスのエクスポート。</a>
@@ -683,6 +692,54 @@
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
+<div class="pilwrap" id="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92javascript%E3%81%AE%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AB%E3%81%99%E3%82%8B%E3%80%82">
+  <h2>
+    <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92javascript%E3%81%AE%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AB%E3%81%99%E3%82%8B%E3%80%82" name="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92javascript%E3%81%AE%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AB%E3%81%99%E3%82%8B%E3%80%82" class="pilcrow">&#182;</a>
+    学習の結果をJavaScriptのオブジェクトにする。
+  </h2>
+</div>
+
+  </div>
+  <div class="body"><p>返り値は<code>[fhName, foName, Wh, Wo]</code>という形式。</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-211" id="line-211">211</a>  
+<a class="line-num" href="#line-212" id="line-212">212</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toObject</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">toObject</span><span class="p">()</span> <span class="p">{</span>
+<a class="line-num" href="#line-213" id="line-213">213</a>    <span class="k">return</span> <span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">fhName</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">foName</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">Wh</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">Wo</span><span class="p">];</span>
+<a class="line-num" href="#line-214" id="line-214">214</a>  <span class="p">};</span>
+<a class="line-num" href="#line-215" id="line-215">215</a>  
+<a class="line-num" href="#line-216" id="line-216">216</a>  
+<a class="line-num" href="#line-217" id="line-217">217</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92json%E3%81%AB%E3%81%99%E3%82%8B%E3%80%82">
+  <h2>
+    <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92json%E3%81%AB%E3%81%99%E3%82%8B%E3%80%82" name="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92json%E3%81%AB%E3%81%99%E3%82%8B%E3%80%82" class="pilcrow">&#182;</a>
+    学習の結果をJSONにする。
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-218" id="line-218">218</a>  
+<a class="line-num" href="#line-219" id="line-219">219</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toJSON</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">toJSON</span><span class="p">()</span> <span class="p">{</span>
+<a class="line-num" href="#line-220" id="line-220">220</a>    <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">toObject</span><span class="p">);</span>
+<a class="line-num" href="#line-221" id="line-221">221</a>  <span class="p">};</span>
+<a class="line-num" href="#line-222" id="line-222">222</a>  
+<a class="line-num" href="#line-223" id="line-223">223</a>  
+<a class="line-num" href="#line-224" id="line-224">224</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
 <div class="pilwrap" id="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0%E3%81%AB%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E3%80%82">
   <h2>
     <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0%E3%81%AB%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E3%80%82" name="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0%E3%81%AB%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E3%80%82" class="pilcrow">&#182;</a>
@@ -695,40 +752,11 @@
   </div>
 </div>
         </td>
-        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-211" id="line-211">211</a>  
-<a class="line-num" href="#line-212" id="line-212">212</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">stream</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">stream</span><span class="p">()</span> <span class="p">{</span>
-<a class="line-num" href="#line-213" id="line-213">213</a>    <span class="kd">var</span>
-<a class="line-num" href="#line-214" id="line-214">214</a>  
-<a class="line-num" href="#line-215" id="line-215">215</a>  </pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-37" id="section-37">&#182;</a>
-</div>
-<p><code>[fhName, foName, Wh, Wo]</code>という形式で、MessagePackでエンコードする。</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-214" id="line-214">214</a>  
-<a class="line-num" href="#line-215" id="line-215">215</a>    <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">fhName</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">foName</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">Wh</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">Wo</span><span class="p">],</span>
-<a class="line-num" href="#line-216" id="line-216">216</a>    <span class="nx">buffer</span> <span class="o">=</span> <span class="nx">msgpack</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span>
-<a class="line-num" href="#line-217" id="line-217">217</a>  
-<a class="line-num" href="#line-218" id="line-218">218</a>  
-<a class="line-num" href="#line-219" id="line-219">219</a>  </pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-38" id="section-38">&#182;</a>
-</div>
-<p>ストリームの作成。</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-218" id="line-218">218</a>  
-<a class="line-num" href="#line-219" id="line-219">219</a>    <span class="nx">stream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">stream_buffers</span><span class="p">.</span><span class="nx">ReadableStreamBuffer</span><span class="p">();</span>
-<a class="line-num" href="#line-220" id="line-220">220</a>  
-<a class="line-num" href="#line-221" id="line-221">221</a>  
-<a class="line-num" href="#line-222" id="line-222">222</a>  </pre></div>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-227" id="line-227">227</a>  
+<a class="line-num" href="#line-228" id="line-228">228</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">msgpackStream</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">msgpackStream</span><span class="p">()</span> <span class="p">{</span>
+<a class="line-num" href="#line-229" id="line-229">229</a>    <span class="kd">var</span>
+<a class="line-num" href="#line-230" id="line-230">230</a>  
+<a class="line-num" href="#line-231" id="line-231">231</a>  </pre></div>
         </td>
       </tr>
       <tr>
@@ -736,16 +764,14 @@
 <div class="pilwrap">
   <a class="pilcrow" href="#section-39" id="section-39">&#182;</a>
 </div>
-<p>ストリームに書き込み。</p>
+<p><code>toObject</code>の形式で、MessagePackでエンコードする。</p>
         </td>
-        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-221" id="line-221">221</a>  
-<a class="line-num" href="#line-222" id="line-222">222</a>    <span class="nx">stream</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">buffer</span><span class="p">);</span>
-<a class="line-num" href="#line-223" id="line-223">223</a>    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="nx">end</span><span class="p">()</span> <span class="p">{</span>
-<a class="line-num" href="#line-224" id="line-224">224</a>      <span class="nx">stream</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">);</span>
-<a class="line-num" href="#line-225" id="line-225">225</a>    <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
-<a class="line-num" href="#line-226" id="line-226">226</a>  
-<a class="line-num" href="#line-227" id="line-227">227</a>  
-<a class="line-num" href="#line-228" id="line-228">228</a>  </pre></div>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-230" id="line-230">230</a>  
+<a class="line-num" href="#line-231" id="line-231">231</a>    <span class="nx">data</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">toObject</span><span class="p">(),</span>
+<a class="line-num" href="#line-232" id="line-232">232</a>    <span class="nx">buffer</span> <span class="o">=</span> <span class="nx">msgpack</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span>
+<a class="line-num" href="#line-233" id="line-233">233</a>  
+<a class="line-num" href="#line-234" id="line-234">234</a>  
+<a class="line-num" href="#line-235" id="line-235">235</a>  </pre></div>
         </td>
       </tr>
       <tr>
@@ -753,23 +779,54 @@
 <div class="pilwrap">
   <a class="pilcrow" href="#section-40" id="section-40">&#182;</a>
 </div>
+<p>ストリームの作成。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-234" id="line-234">234</a>  
+<a class="line-num" href="#line-235" id="line-235">235</a>    <span class="nx">stream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">stream_buffers</span><span class="p">.</span><span class="nx">ReadableStreamBuffer</span><span class="p">();</span>
+<a class="line-num" href="#line-236" id="line-236">236</a>  
+<a class="line-num" href="#line-237" id="line-237">237</a>  
+<a class="line-num" href="#line-238" id="line-238">238</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-41" id="section-41">&#182;</a>
+</div>
+<p>ストリームに書き込み。</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-237" id="line-237">237</a>  
+<a class="line-num" href="#line-238" id="line-238">238</a>    <span class="nx">stream</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">buffer</span><span class="p">);</span>
+<a class="line-num" href="#line-239" id="line-239">239</a>    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="nx">end</span><span class="p">()</span> <span class="p">{</span>
+<a class="line-num" href="#line-240" id="line-240">240</a>      <span class="nx">stream</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">);</span>
+<a class="line-num" href="#line-241" id="line-241">241</a>    <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+<a class="line-num" href="#line-242" id="line-242">242</a>  
+<a class="line-num" href="#line-243" id="line-243">243</a>  
+<a class="line-num" href="#line-244" id="line-244">244</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-42" id="section-42">&#182;</a>
+</div>
 <p>返り値はストリーム。</p>
         </td>
-        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-227" id="line-227">227</a>  
-<a class="line-num" href="#line-228" id="line-228">228</a>    <span class="k">return</span> <span class="nx">stream</span><span class="p">;</span>
-<a class="line-num" href="#line-229" id="line-229">229</a>  <span class="p">};</span>
-<a class="line-num" href="#line-230" id="line-230">230</a>  
-<a class="line-num" href="#line-231" id="line-231">231</a>  
-<a class="line-num" href="#line-232" id="line-232">232</a>  </pre></div>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-243" id="line-243">243</a>  
+<a class="line-num" href="#line-244" id="line-244">244</a>    <span class="k">return</span> <span class="nx">stream</span><span class="p">;</span>
+<a class="line-num" href="#line-245" id="line-245">245</a>  <span class="p">};</span>
+<a class="line-num" href="#line-246" id="line-246">246</a>  
+<a class="line-num" href="#line-247" id="line-247">247</a>  
+<a class="line-num" href="#line-248" id="line-248">248</a>  </pre></div>
         </td>
       </tr>
       <tr>
         <td class="docs"><div class="dox">
   <div class="summary">
-<div class="pilwrap" id="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%83%90%E3%83%83%E3%83%95%E3%82%A1%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82">
+<div class="pilwrap" id="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92msgpack%E5%BD%A2%E5%BC%8F%E3%81%AE%E3%83%90%E3%83%83%E3%83%95%E3%82%A1%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82">
   <h2>
-    <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%83%90%E3%83%83%E3%83%95%E3%82%A1%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82" name="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E3%83%90%E3%83%83%E3%83%95%E3%82%A1%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82" class="pilcrow">&#182;</a>
-    学習の結果をバッファから読み込む。
+    <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92msgpack%E5%BD%A2%E5%BC%8F%E3%81%AE%E3%83%90%E3%83%83%E3%83%95%E3%82%A1%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82" name="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92msgpack%E5%BD%A2%E5%BC%8F%E3%81%AE%E3%83%90%E3%83%83%E3%83%95%E3%82%A1%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82" class="pilcrow">&#182;</a>
+    学習の結果をMsgpack形式のバッファから読み込む。
   </h2>
 </div>
 
@@ -784,20 +841,52 @@
   </div>
 </div>
         </td>
-        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-239" id="line-239">239</a>  
-<a class="line-num" href="#line-240" id="line-240">240</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">load</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">load</span><span class="p">(</span><span class="nx">buffer</span><span class="p">)</span> <span class="p">{</span>
-<a class="line-num" href="#line-241" id="line-241">241</a>    <span class="kd">var</span>
-<a class="line-num" href="#line-242" id="line-242">242</a>    <span class="nx">data</span> <span class="o">=</span> <span class="nx">msgpack</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">buffer</span><span class="p">);</span>
-<a class="line-num" href="#line-243" id="line-243">243</a>  
-<a class="line-num" href="#line-244" id="line-244">244</a>    <span class="nx">assert</span><span class="p">(</span><span class="nx">data</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">,</span> <span class="s1">&#39;buffer is invalid format.&#39;</span><span class="p">);</span>
-<a class="line-num" href="#line-245" id="line-245">245</a>    <span class="nx">assert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;buffer is invalid format.&#39;</span><span class="p">);</span>
-<a class="line-num" href="#line-246" id="line-246">246</a>  
-<a class="line-num" href="#line-247" id="line-247">247</a>    <span class="k">return</span> <span class="k">new</span> <span class="nx">NeuralNetwork</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
-<a class="line-num" href="#line-248" id="line-248">248</a>  <span class="p">};</span>
-<a class="line-num" href="#line-249" id="line-249">249</a>  
-<a class="line-num" href="#line-250" id="line-250">250</a>  
-<a class="line-num" href="#line-251" id="line-251">251</a>  
-<a class="line-num" href="#line-252" id="line-252">252</a>  </pre></div>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-255" id="line-255">255</a>  
+<a class="line-num" href="#line-256" id="line-256">256</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">loadMsgpack</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">loadMsgpack</span><span class="p">(</span><span class="nx">buffer</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-257" id="line-257">257</a>    <span class="kd">var</span>
+<a class="line-num" href="#line-258" id="line-258">258</a>    <span class="nx">data</span> <span class="o">=</span> <span class="nx">msgpack</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">buffer</span><span class="p">);</span>
+<a class="line-num" href="#line-259" id="line-259">259</a>  
+<a class="line-num" href="#line-260" id="line-260">260</a>    <span class="nx">assert</span><span class="p">(</span><span class="nx">data</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">,</span> <span class="s1">&#39;buffer is invalid format.&#39;</span><span class="p">);</span>
+<a class="line-num" href="#line-261" id="line-261">261</a>    <span class="nx">assert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;buffer is invalid format.&#39;</span><span class="p">);</span>
+<a class="line-num" href="#line-262" id="line-262">262</a>  
+<a class="line-num" href="#line-263" id="line-263">263</a>    <span class="k">return</span> <span class="k">new</span> <span class="nx">NeuralNetwork</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+<a class="line-num" href="#line-264" id="line-264">264</a>  <span class="p">};</span>
+<a class="line-num" href="#line-265" id="line-265">265</a>  
+<a class="line-num" href="#line-266" id="line-266">266</a>  
+<a class="line-num" href="#line-267" id="line-267">267</a>  </pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92javascript%E3%81%AE%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82">
+  <h2>
+    <a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92javascript%E3%81%AE%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82" name="%E5%AD%A6%E7%BF%92%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92javascript%E3%81%AE%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80%E3%80%82" class="pilcrow">&#182;</a>
+    学習の結果をJavaScriptのオブジェクトから読み込む。
+  </h2>
+</div>
+
+  </div>
+  <div class="body"><p>引数は、</p>
+
+<ul>
+<li><code>data</code>は学習の結果のオブジェクト。</li>
+</ul>
+
+<p>返り値は読み込まれた<code>NeuralNetwork</code>クラスのインスタンス。</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-274" id="line-274">274</a>  
+<a class="line-num" href="#line-275" id="line-275">275</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">load</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">load</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-276" id="line-276">276</a>    <span class="nx">assert</span><span class="p">(</span><span class="nx">data</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">,</span> <span class="s1">&#39;object is invalid format.&#39;</span><span class="p">);</span>
+<a class="line-num" href="#line-277" id="line-277">277</a>    <span class="nx">assert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;object is invalid format.&#39;</span><span class="p">);</span>
+<a class="line-num" href="#line-278" id="line-278">278</a>  
+<a class="line-num" href="#line-279" id="line-279">279</a>    <span class="k">return</span> <span class="k">new</span> <span class="nx">NeuralNetwork</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+<a class="line-num" href="#line-280" id="line-280">280</a>  <span class="p">};</span>
+<a class="line-num" href="#line-281" id="line-281">281</a>  
+<a class="line-num" href="#line-282" id="line-282">282</a>  
+<a class="line-num" href="#line-283" id="line-283">283</a>  </pre></div>
         </td>
       </tr>
       <tr>
@@ -815,9 +904,9 @@
   </div>
 </div>
         </td>
-        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-253" id="line-253">253</a>  
-<a class="line-num" href="#line-254" id="line-254">254</a>  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">NeuralNetwork</span><span class="p">;</span>
-<a class="line-num" href="#line-255" id="line-255">255</a>  </pre></div>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-284" id="line-284">284</a>  
+<a class="line-num" href="#line-285" id="line-285">285</a>  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">NeuralNetwork</span><span class="p">;</span>
+<a class="line-num" href="#line-286" id="line-286">286</a>  </pre></div>
         </td>
       </tr>
   </tbody>
