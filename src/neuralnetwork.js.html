@@ -730,7 +730,7 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-218" id="line-218">218</a>  
 <a class="line-num" href="#line-219" id="line-219">219</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toJSON</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">toJSON</span><span class="p">()</span> <span class="p">{</span>
-<a class="line-num" href="#line-220" id="line-220">220</a>    <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">toObject</span><span class="p">);</span>
+<a class="line-num" href="#line-220" id="line-220">220</a>    <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">toObject</span><span class="p">());</span>
 <a class="line-num" href="#line-221" id="line-221">221</a>  <span class="p">};</span>
 <a class="line-num" href="#line-222" id="line-222">222</a>  
 <a class="line-num" href="#line-223" id="line-223">223</a>  
@@ -878,7 +878,7 @@
 </div>
         </td>
         <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-274" id="line-274">274</a>  
-<a class="line-num" href="#line-275" id="line-275">275</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">load</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">load</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-275" id="line-275">275</a>  <span class="nx">NeuralNetwork</span><span class="p">.</span><span class="nx">load</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">load</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
 <a class="line-num" href="#line-276" id="line-276">276</a>    <span class="nx">assert</span><span class="p">(</span><span class="nx">data</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">,</span> <span class="s1">&#39;object is invalid format.&#39;</span><span class="p">);</span>
 <a class="line-num" href="#line-277" id="line-277">277</a>    <span class="nx">assert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;object is invalid format.&#39;</span><span class="p">);</span>
 <a class="line-num" href="#line-278" id="line-278">278</a>  
