@@ -203,15 +203,31 @@ NeuralNetwork.prototype.fit = function fit(X, T, eta) {
   return result;
 };
 
+/**
+ * ## 学習の結果をJavaScriptのオブジェクトにする。
+ *
+ * 返り値は`[fhName, foName, Wh, Wo]`という形式。
+ */
+NeuralNetwork.prototype.toObject = function toObject() {
+  return [this.fhName, this.foName, this.Wh, this.Wo];
+};
+
+/**
+ * ## 学習の結果をJSONにする。
+ */
+NeuralNetwork.prototype.toJSON = function toJSON() {
+  return JSON.stringify(this.toObject);
+};
+
 /*
  * ## 学習の結果をストリームに書き出す。
  *
  * 返り値は学習の結果の書き込まれたストリーム。
  */
-NeuralNetwork.prototype.stream = function stream() {
+NeuralNetwork.prototype.msgpackStream = function msgpackStream() {
   var
-  // `[fhName, foName, Wh, Wo]`という形式で、MessagePackでエンコードする。
-  data = [this.fhName, this.foName, this.Wh, this.Wo],
+  // `toObject`の形式で、MessagePackでエンコードする。
+  data = this.toObject(),
   buffer = msgpack.encode(data),
 
   // ストリームの作成。
@@ -228,7 +244,7 @@ NeuralNetwork.prototype.stream = function stream() {
 };
 
 /*
- * ## 学習の結果をバッファから読み込む。
+ * ## 学習の結果をMsgpack形式のバッファから読み込む。
  *
  * 引数は、
  *
@@ -236,7 +252,7 @@ NeuralNetwork.prototype.stream = function stream() {
  *
  * 返り値は読み込まれた`NeuralNetwork`クラスのインスタンス。
  */
-NeuralNetwork.load = function load(buffer) {
+NeuralNetwork.loadMsgpack = function loadMsgpack(buffer) {
   var
   data = msgpack.decode(buffer);
 
@@ -246,6 +262,21 @@ NeuralNetwork.load = function load(buffer) {
   return new NeuralNetwork(data[0], data[1], data[2], data[3]);
 };
 
+/**
+ * ## 学習の結果をJavaScriptのオブジェクトから読み込む。
+ *
+ * 引数は、
+ *
+ * - `data`は学習の結果のオブジェクト。
+ *
+ * 返り値は読み込まれた`NeuralNetwork`クラスのインスタンス。
+ */
+NeuralNetwork.load = function load(object) {
+  assert(data instanceof Array, 'object is invalid format.');
+  assert(data.length === 4, 'object is invalid format.');
+
+  return new NeuralNetwork(data[0], data[1], data[2], data[3]);
+};
 
 /*
  * # クラスのエクスポート。

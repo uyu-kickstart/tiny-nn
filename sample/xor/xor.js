@@ -42,7 +42,7 @@ fileName = process.argv[2];
 
 // ファイルを読み込むか、新しく`NeuralNetwork`クラスのインスタンスを作成する。
 if (fs.existsSync(fileName)) {
-  network = NeuralNetwork.load(fs.readFileSync(fileName));
+  network = NeuralNetwork.loadMsgpack(fs.readFileSync(fileName));
 } else {
   network = new NeuralNetwork('sigmoid', 'tanh', nn.randomMatrix(H_LEN, X_LEN + 1), nn.randomMatrix(O_LEN, H_LEN + 1));
 }
@@ -109,7 +109,7 @@ function run(X, tn) {
 // 学習したデータをファイルに書き出す。
 console.log('- - - - - - -');
 console.log('save to ' + fileName);
-network.stream()
+network.msgpackStream()
   .pipe(fs.createWriteStream(fileName))
   .on('finish', function end() {
     console.log('save done');
