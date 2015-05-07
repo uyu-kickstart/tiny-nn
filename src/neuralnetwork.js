@@ -216,7 +216,7 @@ NeuralNetwork.prototype.toObject = function toObject() {
  * ## 学習の結果をJSONにする。
  */
 NeuralNetwork.prototype.toJSON = function toJSON() {
-  return JSON.stringify(this.toObject);
+  return JSON.stringify(this.toObject());
 };
 
 /*
